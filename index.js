@@ -11,7 +11,8 @@ import geminiResponse from "./gemini.js";
 const app = express();
 app.use(
   cors({
-    origin: "https://intellia-frontend.onrender.com",
+    origin: "*",
+    // origin: "https://intellia-frontend.onrender.com",
     credentials: true,
   })
 );
