@@ -42,9 +42,25 @@ now your userInput- ${command}
         },
       ],
     });
-    return result.data.candidates[0].content.parts[0].text;
+    // return result.data.candidates[0].content.parts[0].text;
+
+    if (result?.data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+      return result.data.candidates[0].content.parts[0].text;
+    } else {
+      console.error("⚠️ No text returned from Gemini:", result?.data);
+      return JSON.stringify({
+        type: "general",
+        userInput: command,
+        response: "Sorry, I couldn’t understand that.",
+      });
+    }
   } catch (error) {
     console.log(error);
+    return JSON.stringify({
+      type: "general",
+      userInput: command,
+      response: "Something went wrong. Please try again.",
+    });
   }
 };
 

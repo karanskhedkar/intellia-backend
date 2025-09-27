@@ -50,6 +50,9 @@ export const askToAssistant = async (req, res) => {
     const assistantName = user.assistantName;
     const result = await geminiResponse(command, assistantName, userName);
 
+
+    console.log("=======================>",result)
+
     const jsonMatch = result.match(/{[\s\S]*}/);
     if (!jsonMatch) {
       return res.ststus(400).json({ response: "sorry, i can't understand" });
@@ -103,6 +106,7 @@ export const askToAssistant = async (req, res) => {
           .json({ response: "I didn't understand that command." });
     }
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ response: "ask assistant error" });
   }
 };
